@@ -80,6 +80,14 @@ namespace Wox.Plugin.ProcessKiller
                             if (!p.HasExited)
                             {
                                 p.Kill();
+                                if (!p.WaitForExit(10))
+                                {
+                                    MessageBox.Show("Process " + p.ProcessName + "(" + p.Id.ToString() + ") couldn't be killed")
+                                }
+                                catch (Exception exception)
+                                {
+                                    MessageBox.Show("Exception while trying to kill process " + p.ProcessName + "(" + p.Id.ToString() + "): " + exception.ToString());
+                                }
                             }
                             
                             return true;
@@ -102,6 +110,14 @@ namespace Wox.Plugin.ProcessKiller
                                    if (!p.HasExited)
                                    {
                                         p.Kill();
+                                        if (!p.WaitForExit(10))
+                                        {
+                                            MessageBox.Show("Process " + p.ProcessName + "(" + p.Id.ToString() + ") couldn't be killed")
+                                        }
+                                        catch (Exception exception)
+                                        {
+                                            MessageBox.Show("Exception while trying to kill process " + p.ProcessName + "(" + p.Id.ToString() + "): " + exception.ToString());
+                                        }
                                    }
                                }
                                return true;
