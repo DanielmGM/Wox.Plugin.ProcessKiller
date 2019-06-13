@@ -77,7 +77,11 @@ namespace Wox.Plugin.ProcessKiller
                         SubTitle = path,
                         Action = (c) =>
                         {
-                            p.Kill();
+                            if (!p.HasExited)
+                            {
+                                p.Kill();
+                            }
+                            
                             return true;
                         }
                     });
@@ -95,7 +99,10 @@ namespace Wox.Plugin.ProcessKiller
                            {
                                foreach (var p in processlist)
                                {
-                                   p.Kill();
+                                   if (!p.HasExited)
+                                   {
+                                        p.Kill();
+                                   }
                                }
                                return true;
                            }
